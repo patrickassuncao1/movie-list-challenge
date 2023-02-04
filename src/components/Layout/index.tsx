@@ -7,7 +7,7 @@ const Layout: React.FC = () => {
         <>
             <SideMenu />
             <main className="flex justify-end  w-full h-full min-h-screen pb-4 relative bg-gray-50 dark:bg-primary">
-                <div className="w-full md:w-[calc(100%_-_4rem)]">
+                <div className="w-[calc(100%_-_4rem)]">
                     <div className="px-4 py-2">
                         <Outlet />
                     </div>

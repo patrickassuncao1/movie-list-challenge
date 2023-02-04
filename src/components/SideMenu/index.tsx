@@ -59,7 +59,7 @@ const SideMenu: React.FC = () => {
                         >
                             <FiLogOut className="h-5 w-5 opacity-75" />
                             <span
-                                className="absolute left-full top-1/2 ml-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white opacity-0 group-hover:opacity-100"
+                                className="absolute left-full top-1/2 ml-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white hidden group-hover:block"
                             >
                                 Logout
                             </span>
