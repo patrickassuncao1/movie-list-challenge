@@ -1,12 +1,15 @@
+import { AnimateSharedLayout } from "framer-motion";
 import ThemeProvider from './context/ThemeContext';
 import AppRoutes from './routes';
 
 const App = () => {
 
   return (
-    <ThemeProvider>
-      <AppRoutes />
-    </ThemeProvider>
+    <AnimateSharedLayout>
+      <ThemeProvider>
+        <AppRoutes />
+      </ThemeProvider>
+    </AnimateSharedLayout>
   )
 }
 

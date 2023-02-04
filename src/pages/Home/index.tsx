@@ -1,9 +1,10 @@
 import React from 'react';
 import { HiSearch } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 import MovieCard from '../../components/MovieCard';
-import { motion } from "framer-motion";
 import { containerMovieCard } from '../../utils/variants';
+import { routeLinks } from '../../utils/constants';
 
 const Home: React.FC = () => {
   return (
@@ -40,8 +41,16 @@ const Home: React.FC = () => {
           initial="hidden"
           animate="visible"
         >
-          <MovieCard urlImage="https://images.unsplash.com/photo-1603871165848-0aa92c869fa1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80" />
-          <MovieCard urlImage="https://images.unsplash.com/photo-1520464399004-1f1e8e938bb3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWFuYXVzfGVufDB8fDB8fA%3D%3D&w=1000&q=80" />
+          <MovieCard
+            to={routeLinks.movie}
+            layoutId="test"
+            urlImage="https://images.unsplash.com/photo-1603871165848-0aa92c869fa1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"
+          />
+          <MovieCard
+            to={routeLinks.movie}
+            layoutId="test2"
+            urlImage="https://images.unsplash.com/photo-1520464399004-1f1e8e938bb3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWFuYXVzfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+          />
         </motion.div>
       </div>
     </section>

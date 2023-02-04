@@ -4,16 +4,19 @@ import { MovieCardItem } from '../../utils/variants';
 import { Link } from 'react-router-dom';
 
 type MovieCardType = {
-    urlImage: string
+    urlImage: string,
+    to: string,
+    layoutId: string
 }
 
-const MovieCard = ({ urlImage }: MovieCardType) => {
+const MovieCard = ({ urlImage, to, layoutId }: MovieCardType) => {
     return (
         <motion.article
             variants={MovieCardItem}
+            layoutId={layoutId}
             className="group relative w-full  bg-black min-h-[15rem] sm:min-h-[20rem] sm:min-w-[18rem] sm:w-auto sm:max-w-[18rem] flex flex-col h-full justify-end"
         >
-            <Link to={"/"}>
+            <Link to={to}>
                 <img
                     alt="Developer"
                     src={urlImage}
