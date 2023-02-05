@@ -14,7 +14,7 @@ model Movie {
   id          String @id @default(uuid())
   author      String
   title       String
-  durantion   Int
+  duration   Int
   releaseYear Int
   description String @db.Text
 
