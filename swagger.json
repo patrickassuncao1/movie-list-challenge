@@ -55,7 +55,7 @@
                     "400": {
                         "description": "Bad Request"
                     },
-                    "200": {
+                    "201": {
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -67,6 +67,62 @@
                                         "data": {
                                             "type": "object",
                                             "$ref": "#/components/schemas/Movie"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/movie/find-many": {
+            "get": {
+                "summary": "Find many movies (with paginate)",
+                "description": "Rota reponsável por buscar todos os filmes com paginação",
+                "tags": [
+                    "Movie"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "releaseYear": {
+                                                        "type": "integer",
+                                                        "format": "int32"
+                                                    },
+                                                    "MovieImage": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string"
+                                                            },
+                                                            "url": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationObject"
                                         }
                                     }
                                 }
@@ -106,6 +162,26 @@
                     "updated_at": {
                         "type": "string",
                         "format": "date-time"
+                    }
+                }
+            },
+            "PaginationObject": {
+                "properties": {
+                    "currentPage": {
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    "total": {
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    "numberPages": {
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    "perPage": {
+                        "type": "number",
+                        "format": "int32"
                     }
                 }
             }

@@ -4,7 +4,7 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import path from "path";
 
-import { routes } from "./routes/v1";
+import { routes } from "./routes";
 import swaggerDocs from '../swagger.json';
 import { errorsMiddleware } from "./middleware/errorsMiddleware";
 

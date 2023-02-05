@@ -1,6 +1,6 @@
-import { createMovieType } from "../../../@types/models";
-import { prismaClient } from "../../../config/database/prismaClient";
-import { envConf } from "../../../config/env";
+import { createMovieType } from "../../@types/models";
+import { prismaClient } from "../../config/database/prismaClient";
+import { envConf } from "../../config/env";
 
 class CreateMovieRepository {
 

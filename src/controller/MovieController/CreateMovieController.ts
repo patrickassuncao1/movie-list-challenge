@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { AppError } from "../../../errors/AppError";
-import { CreateMovieRepository } from "../../../repository/v1/MovieRepository/CreateMovieRepository";
+import { AppError } from "../../errors/AppError";
+import { ResponseMessage } from "../../messages/ResponseMessage";
+import { CreateMovieRepository } from "../../repository/MovieRepository/CreateMovieRepository";
 
 class CreateMovieController {
 
@@ -12,7 +13,7 @@ class CreateMovieController {
         if (!file) throw new AppError("File is required");
 
         const repo = new CreateMovieRepository();
-        
+
         const movie = await repo.execute(file, {
             author,
             description,
@@ -20,9 +21,10 @@ class CreateMovieController {
             releaseYear,
             title
         });
-        
-        
-        return response.json(movie);
+
+        const responseMessage = new ResponseMessage("Success", movie);
+
+        return response.status(201).json(responseMessage);
     }
 
 }
