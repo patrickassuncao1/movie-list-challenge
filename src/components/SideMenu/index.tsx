@@ -4,12 +4,15 @@ import { FiLogOut } from "react-icons/fi";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 import useTheme from '../../hooks/useTheme';
+import { routeLinks } from '../../utils/constants';
 import Toggle from '../Toggle';
 import SideMenuLink from './SideMenuLink';
 
 const SideMenu: React.FC = () => {
 
     const { handleThemeModeChange, isDark } = useTheme();
+
+    const { addMovie, home} = routeLinks;
 
     return (
         <aside>
@@ -26,7 +29,7 @@ const SideMenu: React.FC = () => {
                             <div className="py-4">
                                 <SideMenuLink
                                     text="Início"
-                                    to={{ pathname: "/" }}
+                                    to={{ pathname: home }}
                                 >
                                     <AiOutlineHome className="h-5 w-5 opacity-75" />
                                 </SideMenuLink>
@@ -34,7 +37,7 @@ const SideMenu: React.FC = () => {
                             <ul className="space-y-1 border-t border-gray-100 pt-4">
                                 <li>
                                     <SideMenuLink
-                                        to={{ pathname: "/2" }}
+                                        to={{ pathname: addMovie }}
                                         text="Adicionar Filme"
                                     >
                                         <MdOutlineAddPhotoAlternate className="h-5 w-5 opacity-75" />

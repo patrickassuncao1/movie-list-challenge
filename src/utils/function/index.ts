@@ -16,3 +16,8 @@ export const setThemeModeInLocalStorage = (isDark: boolean) => {
 
     localStorage.setItem("theme", theme);
 }
+
+export const onlyNumbers = (value: string) => {
+    const num = value.replace(/[^0-9]/g, '');
+    return num;
+}

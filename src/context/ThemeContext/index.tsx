@@ -7,7 +7,7 @@ export const ThemeContext = createContext<ThemeContextType>({} as ThemeContextTy
 
 const ThemeProvider = ({ children }: ProviderType) => {
 
-    const [isDark, setIsDark] = useState(false);
+    const [isDark, setIsDark] = useState(true);
 
     useEffect(() => {
         const theme = changeThemeMode();

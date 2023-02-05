@@ -1,4 +1,5 @@
 export const routeLinks = {
     home: "/",
-    movie: "/filme"
+    movie: "/filme",
+    addMovie: "/adicionar-filme"
 } 
