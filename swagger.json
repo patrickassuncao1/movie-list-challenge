@@ -83,6 +83,20 @@
                 "tags": [
                     "Movie"
                 ],
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "search table movies (string)",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Current Page (number)",
+                        "required": false
+                    }
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -131,6 +145,62 @@
                     }
                 }
             }
+        },
+        "/movie/find-first/{movieId}": {
+            "get": {
+                "summary": "Find first movie",
+                "description": "Rota reponsável por buscar um filme pelo id",
+                "tags": [
+                    "Movie"
+                ],
+                "parameters": [
+                    {
+                        "name": "movieId",
+                        "in": "path",
+                        "description": "string",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "allOf": [
+                                                {
+                                                    "$ref": "#/components/schemas/Movie"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "MovieImage": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "url": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -162,6 +232,30 @@
                     "updated_at": {
                         "type": "string",
                         "format": "date-time"
+                    }
+                }
+            },
+            "MovieImage": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "movieId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "fileName": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
                     }
                 }
             },
