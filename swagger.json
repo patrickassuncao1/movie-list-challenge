@@ -42,12 +42,10 @@
                                     },
                                     "description": {
                                         "type": "string"
+                                    },
+                                    "author": {
+                                        "type": "string"
                                     }
-                                }
-                            },
-                            "examples": {
-                                "value": {
-                                    "title": "Title Movie"
                                 }
                             }
                         }

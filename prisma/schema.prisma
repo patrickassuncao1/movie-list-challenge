@@ -14,12 +14,26 @@ model Movie {
   id          String @id @default(uuid())
   author      String
   title       String
-  duration   Int
+  duration    Int
   releaseYear Int
   description String @db.Text
 
-  created_ad DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_ad DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+  MovieImage MovieImage?
 
   @@map("movies")
+}
+
+model MovieImage {
+  id         String   @id @default(uuid())
+  movieId    String?  @unique
+  name       String
+  size       Int
+  fileName   String
+  url        String
+
+  movie Movie? @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@map("movie_images")
 }
