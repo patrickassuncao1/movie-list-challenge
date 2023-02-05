@@ -6,7 +6,7 @@ type UseAlertType = {
     timeToHide?: number
 };
 
-type showAlertType = Omit<AlertType, "show">;
+export type showAlertType = Omit<AlertType, "show">;
 
 const initialValues = {
     show: false,

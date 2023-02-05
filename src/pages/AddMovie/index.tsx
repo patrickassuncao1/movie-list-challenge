@@ -1,6 +1,13 @@
+import { AxiosError } from 'axios';
 import React, { useState } from 'react';
+import { useMutation } from 'react-query';
 import { Link } from 'react-router-dom';
+import { movieFormType } from '../../@types/models';
+import Alert from '../../components/Alert';
 import Message from '../../components/Message';
+import useAlert from '../../hooks/useAlert';
+import { createMovie } from '../../services/api/movie';
+import { routeLinks } from '../../utils/constants';
 import MovieForm from './MovieForm';
 
 
@@ -8,8 +15,32 @@ const AddMovie: React.FC = () => {
 
     const [isSuccess, setIsSuccess] = useState(false);
 
+    const { alert, showAndHidden } = useAlert({});
+
+    const { mutateAsync, isLoading } = useMutation(createMovie);
+
+    const createMovieSubmit = async (values: movieFormType) => {
+
+        await mutateAsync(values, {
+            onSuccess: (movie) => {
+                setIsSuccess(true);
+            },
+            onError: (error) => {
+                const message = error instanceof AxiosError
+                    ? error.response?.data.message : "Houve Algum error";
+
+                showAndHidden({ message: message, type: "danger" });
+            }
+        })
+    }
+
     return (
         <section className="px-2 block h-full mt-6 max-w-screen-2xl ">
+            <Alert
+                show={alert.show}
+                message={alert.message}
+                type={alert.type}
+            />
             <h1
                 className="text-xl my-4 font-extrabold tracking-tight leading-none dark:text-white text-gray-900 md:text-3xl">
                 Adicionar Filme
@@ -19,7 +50,11 @@ const AddMovie: React.FC = () => {
             </p>
             <div className="w-full">
                 {!isSuccess ? (
-                    <MovieForm />
+                    <MovieForm
+                        loadingSubmit={isLoading}
+                        showAndHidden={showAndHidden}
+                        createMovieSubmit={createMovieSubmit}
+                    />
                 ) : (
                     <div className="mt-8">
                         <Message
@@ -28,7 +63,7 @@ const AddMovie: React.FC = () => {
                         >
                             <div className="mt-8 flex gap-2 sm:flex-row flex-col">
                                 <Link
-                                    to={'/parceiro'}
+                                    to={routeLinks.home}
                                     className="block gap-2 sm:w-[12rem] w-full text-center rounded-lg bg-blue-700 hover:bg-blue-800 px-4 py-2 text-white transition"
                                 >
                                     Visualizar

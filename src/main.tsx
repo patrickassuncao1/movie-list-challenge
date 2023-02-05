@@ -1,10 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { QueryClientProvider, QueryClient } from 'react-query';
+
 import App from './App';
 import './styles/tailwind.css';
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false
+    }
+  }
+});
+
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>,
 )
