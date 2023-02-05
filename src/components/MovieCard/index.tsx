@@ -6,10 +6,12 @@ import { Link } from 'react-router-dom';
 type MovieCardType = {
     urlImage: string,
     to: string,
-    layoutId: string
+    layoutId: string,
+    title: string,
+    subTitle: string | number
 }
 
-const MovieCard = ({ urlImage, to, layoutId }: MovieCardType) => {
+const MovieCard = ({ urlImage, to, layoutId, subTitle, title }: MovieCardType) => {
     return (
         <motion.article
             variants={MovieCardItem}
@@ -18,16 +20,17 @@ const MovieCard = ({ urlImage, to, layoutId }: MovieCardType) => {
         >
             <Link to={to}>
                 <img
-                    alt="Developer"
+                    alt="image-cards"
                     src={urlImage}
+                    loading="lazy"
                     className="absolute inset-0 h-full w-full object-cover object-center opacity-75 transition-opacity group-hover:opacity-50"
                 />
 
                 <div className="relative p-4">
-                    <p className="text-sm font-medium uppercase tracking-widest text-pink-500">
-                        Developer
+                    <p className="text-xs font-medium tracking-widest text-gray-200">
+                        {subTitle}
                     </p>
-                    <p className="text-2xl font-bold text-white">Tony Wayne</p>
+                    <p className="text-2xl font-bold text-white">{title}</p>
                 </div>
             </Link>
         </motion.article>

@@ -18,17 +18,19 @@ type MovieImagesType = {
     url: string
 }
 
-type responsePaginationType = {
+export type responsePaginationType = {
     currentPage: number,
     total: number,
     numberPages: number,
     perPage: number
 }
 
+type findManyMovieData = Omit<MovieType, "created_ad" | "updated_at" | "description" | "duration" | "author"> & {
+    MovieImage: MovieImagesType
+};
+
 export type findManyMoviesResponseType = {
     message: string,
-    data: Omit<MovieType, "created_ad" | "updated_at" | "description" | "duration" | "author"> & {
-        MovieImage: MovieImagesType
-    }[],
+    data: findManyMovieData[],
     meta: responsePaginationType
 }

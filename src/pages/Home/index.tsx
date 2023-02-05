@@ -1,12 +1,56 @@
-import React from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { HiSearch } from "react-icons/hi";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import MovieCard from '../../components/MovieCard';
 import { containerMovieCard } from '../../utils/variants';
 import { routeLinks } from '../../utils/constants';
+import { useQuery } from 'react-query';
+import { findManyMovies } from '../../services/api/movie';
+import RenderIf from '../../components/RenderIf';
+import { ImSpinner2 } from 'react-icons/im';
+import Pagination from '../../components/Pagination';
 
 const Home: React.FC = () => {
+
+  const [params, setParams] = useState({
+    page: 1,
+    search: ""
+  });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [params.page]);
+
+  const { data, isLoading } = useQuery(
+    ["find-many-movies", params],
+    () => findManyMovies(params),
+    {
+      keepPreviousData: true,
+      retry: 0
+    }
+  );
+
+
+  const handleClickLink = (number: number) => {
+    setParams({ ...params, page: number });
+  }
+
+  const prevPageClick = () => {
+    setParams({ ...params, page: params.page - 1 });
+  }
+
+  const nextPageLink = () => {
+    setParams({ ...params, page: params.page + 1 });
+  }
+
+  const handleSearchChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    setParams({
+      page: 1,
+      search: value
+    });
+  };
+
   return (
     <section className="px-2 block h-full mt-6 max-w-screen-2xl ">
       <div>
@@ -22,7 +66,7 @@ const Home: React.FC = () => {
             </div>
             <input
               type="search"
-              // onChange={handleSearchChange}
+              onChange={handleSearchChange}
               id="default-search"
               className="block w-full p-4 pl-10 text-sm text-gray-900 border outline-none border-gray-300 rounded-lg bg-gray-50 focus:ring-gray-700 focus:border-gray-700"
               placeholder="Pesquisar o nome do filme"
@@ -35,23 +79,48 @@ const Home: React.FC = () => {
         <h2 className="text-lg my-4 font-extrabold leading-none tracking-tight text-gray-900 md:text-xl dark:text-white">
           Próximos Filmes
         </h2>
-        <motion.div
-          className="flex-wrap flex flex-1 gap-6 h-max items-center justify-start"
-          variants={containerMovieCard}
-          initial="hidden"
-          animate="visible"
-        >
-          <MovieCard
-            to={routeLinks.movie}
-            layoutId="test"
-            urlImage="https://images.unsplash.com/photo-1603871165848-0aa92c869fa1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"
-          />
-          <MovieCard
-            to={routeLinks.movie}
-            layoutId="test2"
-            urlImage="https://images.unsplash.com/photo-1520464399004-1f1e8e938bb3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bWFuYXVzfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
-          />
-        </motion.div>
+        <RenderIf isTrue={isLoading}>
+          <span className="flex items-center pl-3 dark:text-white">
+            <ImSpinner2 className="inline mr-3 w-4 h-4 animate-spin text-blue-600" />
+            Carregando ...
+          </span>
+        </RenderIf>
+
+        <RenderIf isTrue={data?.data.length || 0 > 0  ? true : false}>
+          <motion.div
+            className="flex-wrap flex flex-1 gap-6 h-max items-center justify-start"
+            variants={containerMovieCard}
+            initial={"hidden"}
+            animate={"visible"}
+
+          >
+            {data?.data.map((item) => (
+              <MovieCard
+                key={item.id}
+                to={routeLinks.movie}
+                subTitle={item.releaseYear}
+                title={item.title}
+                layoutId={item.id}
+                urlImage={item.MovieImage.url}
+              />
+            ))}
+          </motion.div>
+        </RenderIf>
+
+      </div>
+      <div className="md:mt-10 mt-8">
+        {data?.meta &&
+          <RenderIf isTrue={data.meta.total > data.meta.perPage}>
+            <Pagination
+              {...data?.meta}
+              isLoading={isLoading}
+              handleClickLink={handleClickLink}
+              nextPageLink={nextPageLink}
+              prevPageClick={prevPageClick}
+              dataLength={data.data.length}
+            />
+          </RenderIf>
+        }
       </div>
     </section>
   );

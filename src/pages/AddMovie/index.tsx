@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import React, { useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
 import { movieFormType } from '../../@types/models';
 import Alert from '../../components/Alert';
@@ -15,6 +15,8 @@ const AddMovie: React.FC = () => {
 
     const [isSuccess, setIsSuccess] = useState(false);
 
+    const queryClient = useQueryClient();
+
     const { alert, showAndHidden } = useAlert({});
 
     const { mutateAsync, isLoading } = useMutation(createMovie);
@@ -23,6 +25,7 @@ const AddMovie: React.FC = () => {
 
         await mutateAsync(values, {
             onSuccess: (movie) => {
+                queryClient.invalidateQueries({ queryKey: ["find-many-movies"] });
                 setIsSuccess(true);
             },
             onError: (error) => {

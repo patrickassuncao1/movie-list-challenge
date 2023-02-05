@@ -18,3 +18,15 @@ export const createMovie = async (items: movieFormType) => {
 
     return data.data as MovieType;
 }
+
+export const findManyMovies = async ({ page, search }: findManyMoviesType) => {
+
+    const searchValue = search ? "&search=" + search : "";
+
+    const response = await api.get("/movie/find-many/?page=" + page + searchValue);
+    const data = response.data;
+
+    return data as findManyMoviesResponseType;
+
+}
+
