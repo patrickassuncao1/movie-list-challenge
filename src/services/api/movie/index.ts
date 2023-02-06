@@ -1,4 +1,4 @@
-import { findManyMoviesResponseType, movieFormType, MovieType } from '../../../@types/models';
+import { findFirstMovieResponseType, findManyMoviesResponseType, movieFormType, MovieType } from '../../../@types/models';
 import { api } from '../../../config/api';
 
 type findManyMoviesType = {
@@ -30,3 +30,10 @@ export const findManyMovies = async ({ page, search }: findManyMoviesType) => {
 
 }
 
+export const findFirstMovie = async (movieId: string) => {
+    
+    const response = await api.get("/movie/find-first/" + movieId);
+    const data = response.data;
+
+    return data.data as findFirstMovieResponseType;
+}

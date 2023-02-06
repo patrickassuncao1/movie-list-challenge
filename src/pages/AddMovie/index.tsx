@@ -38,7 +38,7 @@ const AddMovie: React.FC = () => {
     }
 
     return (
-        <section className="px-2 block h-full mt-6 max-w-screen-2xl ">
+        <section className="px-2 block h-full mt-10 max-w-screen-2xl ">
             <Alert
                 show={alert.show}
                 message={alert.message}

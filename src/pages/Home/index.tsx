@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { HiSearch } from "react-icons/hi";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import MovieCard from '../../components/MovieCard';
 import { containerMovieCard } from '../../utils/variants';
@@ -17,6 +17,7 @@ const Home: React.FC = () => {
     page: 1,
     search: ""
   });
+
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
@@ -52,7 +53,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <section className="px-2 block h-full mt-6 max-w-screen-2xl ">
+    <section className="px-2 block h-full mt-10 ">
       <div>
         <h1
           className="text-xl my-4 font-extrabold tracking-tight leading-none dark:text-white text-gray-900 md:text-3xl">
@@ -85,8 +86,13 @@ const Home: React.FC = () => {
             Carregando ...
           </span>
         </RenderIf>
+        <RenderIf isTrue={(data?.data.length ?? 0) <= 0 && !isLoading}>
+          <span className="flex items-center py-3 dark:text-white">
+            Nenhum Filme Encontrado
+          </span>
+        </RenderIf>
 
-        <RenderIf isTrue={data?.data.length || 0 > 0  ? true : false}>
+        <RenderIf isTrue={data?.data.length || 0 > 0 ? true : false}>
           <motion.div
             className="flex-wrap flex flex-1 gap-6 h-max items-center justify-start"
             variants={containerMovieCard}
@@ -97,10 +103,9 @@ const Home: React.FC = () => {
             {data?.data.map((item) => (
               <MovieCard
                 key={item.id}
-                to={routeLinks.movie}
+                to={routeLinks.movieInfo + item.id}
                 subTitle={item.releaseYear}
                 title={item.title}
-                layoutId={item.id}
                 urlImage={item.MovieImage.url}
               />
             ))}

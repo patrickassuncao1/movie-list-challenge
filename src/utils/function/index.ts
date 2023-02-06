@@ -73,3 +73,14 @@ export const createLinksPagination = (pages: number, currentPage: number) => {
 
     return array;
 }
+
+export const convertToHoursAndMinutes = (minutes: number) => {
+
+    const hours = Math.floor(minutes / 60);
+    const min = minutes % 60;
+
+    const hoursExist = hours ? hours + "h" : "";
+    const minExist = min ? min + "m" : "";
+
+    return `${hoursExist} ${minExist}`;
+}

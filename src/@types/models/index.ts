@@ -12,6 +12,9 @@ export type MovieType = {
 export type movieFormType = Omit<MovieType, "created_ad" | "updated_at" | "id"> & {
     file: File
 }
+export type findFirstMovieResponseType = MovieType & {
+    MovieImage: MovieImagesType
+}
 
 type MovieImagesType = {
     id: string,

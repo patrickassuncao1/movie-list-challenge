@@ -8,14 +8,14 @@ import { routeLinks } from '../utils/constants';
 
 const AppRoutes: React.FC = () => {
 
-    const { home, movie, addMovie } = routeLinks;
+    const { home, movieInfo, addMovie } = routeLinks;
 
     return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Layout />}>
                     <Route path={home} element={<Home />} />
-                    <Route path={movie} element={<MovieInfo />} />
+                    <Route path={movieInfo + ":movieId"} element={<MovieInfo />} />
                     <Route path={addMovie} element={<AddMovie />} />
                 </Route>
                 <Route path='*' element={<NotFound />} />
