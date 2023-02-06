@@ -2,7 +2,7 @@
 
 ## Divisão da aplicação
 
-- Front End : movie-list-app
+- Front End : movie-list-web
 - Back End : movie-list-server
 
 ## Tecnologias utilizadas
