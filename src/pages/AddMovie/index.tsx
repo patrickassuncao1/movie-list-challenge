@@ -19,7 +19,7 @@ const AddMovie: React.FC = () => {
 
     const { alert, showAndHidden } = useAlert({});
 
-    const { mutateAsync, isLoading } = useMutation(createMovie);
+    const { mutateAsync, isLoading, data } = useMutation(createMovie);
 
     const createMovieSubmit = async (values: movieFormType) => {
 
@@ -66,7 +66,7 @@ const AddMovie: React.FC = () => {
                         >
                             <div className="mt-8 flex gap-2 sm:flex-row flex-col">
                                 <Link
-                                    to={routeLinks.home}
+                                    to={routeLinks.movieInfo + data?.id}
                                     className="block gap-2 sm:w-[12rem] w-full text-center rounded-lg bg-blue-700 hover:bg-blue-800 px-4 py-2 text-white transition"
                                 >
                                     Visualizar

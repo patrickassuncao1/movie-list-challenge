@@ -6,7 +6,6 @@ import DropzoneEl from '../../../components/DropzoneEl';
 import { onlyNumbers } from '../../../utils/function';
 import Spinner from '../../../components/Spinner';
 import { showAlertType } from '../../../hooks/useAlert';
-import { AlertType } from '../../../components/Alert';
 import { movieFormType } from '../../../@types/models';
 
 const maxFileSize = 2 * 1024 * 1024 // 2mb;

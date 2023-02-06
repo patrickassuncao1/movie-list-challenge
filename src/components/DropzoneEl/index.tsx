@@ -60,7 +60,7 @@ const DropzoneEl = ({ onDrop, image }: DropzoneElType) => {
                                     />
                                 </div>
                             </RenderIf>
-                            <input name="file" className="hidden" {...getInputProps()} />
+                            <input name="file"  data-testid="dropzone" className="hidden" {...getInputProps()} />
                             <RenderIf isTrue={!!image}>
                                 <img
                                     src={image ?? ""}
