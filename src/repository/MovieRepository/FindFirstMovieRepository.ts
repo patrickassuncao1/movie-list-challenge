@@ -1,4 +1,4 @@
-import { prismaClient } from "../../config/database/prismaClient";
+import { prismaClient } from "../../database/prismaClient";
 import { AppError } from "../../errors/AppError";
 
 class FindFirstMovieRepository {

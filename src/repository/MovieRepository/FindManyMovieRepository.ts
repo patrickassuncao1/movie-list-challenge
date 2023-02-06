@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { PaginationObjectType } from "../../@types/models";
-import { prismaClient } from "../../config/database/prismaClient";
+import { prismaClient } from "../../database/prismaClient";
 
 class FindManyMoviesRepository {
 
