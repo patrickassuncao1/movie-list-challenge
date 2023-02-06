@@ -199,10 +199,10 @@ const MovieForm = ({ showAndHidden, createMovieSubmit, loadingSubmit }: MovieFor
                     <button
                         type='submit'
                         disabled={loadingSubmit}
-                        className="relative w-full sm:w-auto inline-block shrink-0 rounded-md bg-blue-700 hover:bg-blue-800 text-white px-12 py-3 text-sm font-medium transition  focus:outline-none focus:ring"
+                        className="relative w-full sm:w-44 inline-block shrink-0 rounded-md bg-blue-700 hover:bg-blue-800 text-white px-12 py-3 text-sm font-medium transition  focus:outline-none focus:ring"
                     >
-                        <Spinner show={false} />
-                        Postar
+                        <Spinner show={loadingSubmit} />
+                        {loadingSubmit ? "Postando..." : "Postar"}
                     </button>
                 </div>
             </form >
